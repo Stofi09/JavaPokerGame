@@ -24,7 +24,7 @@ public class SocketController {
     @MessageMapping("/sendback")
     @SendTo("/topic/user")
     public MessageBean sendthat(@Payload MessageBean message) {
-    	message.setType("sikerult");
+    	message.setType("It is working! (from the server...)");
     	return message;
     }
    
