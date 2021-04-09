@@ -140,8 +140,18 @@ public class SocketController {
     	turn  = game.turnCounter();
     	message.setType("Check");
     	message.setTurn(turn);
+    	
     	return message;
     	}
+    }
+    
+    @MessageMapping("/allIn")
+    @SendTo("/topic/user")
+    public MessageBean sendAllIn(@Payload MessageBean message) {
+    	System.out.println("sikerult111");
+    	message.setTurn(5);
+    	message.setType("allIn");
+    	return message;
     }
     
     @MessageMapping("/firstRaise")

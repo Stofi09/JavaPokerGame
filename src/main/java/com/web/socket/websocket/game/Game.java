@@ -114,6 +114,7 @@ public class Game implements iGame{
 		if (turn == 7) {
 			turn = 0;
 		}
+		
 		return turn;
 	}
 	private void setTurnFalse() {
