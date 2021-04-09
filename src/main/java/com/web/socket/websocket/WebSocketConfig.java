@@ -36,8 +36,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @EventListener
     public void onSocketDisconnected(SessionDisconnectEvent event) {
-        StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
-        System.out.println("[Disonnected] " + sha.getSessionId());
-        SocketController.setHasDisconnectedToTrue();
+    	  StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
+          String value = sha.getSessionId();
+          System.out.println("[Disonnected] " + sha.getSessionId());
+          SocketController.removePlayer(value);
     }
 }

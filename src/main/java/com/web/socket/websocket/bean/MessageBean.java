@@ -21,7 +21,18 @@ public class MessageBean {
     private int [] cards;
     private int turn;
     private String result;
+    private String id;
     
+
+
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 
 
@@ -177,4 +188,7 @@ public class MessageBean {
     public void setMessage(String message) {
         this.message = message;
     }
+    public String getBean() {
+		return this.name + "" + this.oppName;
+	}
 }
