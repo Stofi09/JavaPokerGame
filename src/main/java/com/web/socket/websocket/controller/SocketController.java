@@ -35,6 +35,8 @@ public class SocketController {
 	@Autowired
 	private Player player2;
 	
+	ArrayList<Card> deck;
+	
 	
     @MessageMapping("/Join")
     @SendTo("/topic/user")
@@ -45,13 +47,11 @@ public class SocketController {
     	if(game == null ) {
     		game = new Game();
     	}if (game.getPlayer1() == null) {
-    	//	player = new Player(message.getName(),1000,sessionId);
     		game.setPlayer(message.getName(),1000,sessionId);
     		message.setId(sessionId);
     		message.setCredit(1000);
     		message.setType("Join");
     	}else if (game.getPlayer2() == null){
-    	//	player2 = new Player(message.getName(),1000,sessionId);
     		game.setPlayer(message.getName(),1000,sessionId);
     		message.setOppName(game.getPlayer1().getName());
     		message.setId(sessionId);
@@ -69,9 +69,6 @@ public class SocketController {
     			message.setType("reloadPage");
     		}
     	}
-    	
-    	System.out.println(message.getBean());
-    	
         return message;
     }
     
@@ -92,36 +89,27 @@ public class SocketController {
     		message.setType("otherLeft");
         	return message;
     	}else {
-    		//change the player cards? The player who starts the game should receive deck.get0 and 1
-    		
     	// Null the game turn at the end of the game	
     	game.nullTurn();
     	turn = game.turnCounter();
-    	
     	// keep the deck array- just shuffle if its not the first game
-    	ArrayList<Card> deck = new ArrayList<>();
+    	if (deck == null) {
+    	 deck = new ArrayList<>();
+    	 System.out.println("sikerult");
+    	} 
 		deck = Card.makeDeck();
 		Collections.shuffle(deck);
 		
+		// Init player and assign result.
 		player = new Player(message.getName());
-		System.out.println("///|||\\"+player.getName());
-		//these 3 methods could be just one.
 		this.res.setResult(deck.get(0),deck.get(1),deck.get(4),deck.get(5), deck.get(6), deck.get(7), deck.get(8),player);
-		//this.res.checkBooleans();
-		//this.res.setPlayerResult(player);
-		System.out.println(player.toString2() );
-		System.out.println("-------------------");
-		player2 = new Player(game.getOpponentName(message.getName()));
-		System.out.println("///|||\\"+player2.getName());
-		this.res.setResult(deck.get(2),deck.get(3),deck.get(4),deck.get(5), deck.get(6), deck.get(7), deck.get(8),player2);		
-		//this.res.checkBooleans();
-		//this.res.setPlayerResult(player2);
-		System.out.println(player2.toString2() );
-		System.out.println(player.toString2() + " and " + player2.toString2());
 		
+		player2 = new Player(game.getOpponentName(message.getName()));	
+		this.res.setResult(deck.get(2),deck.get(3),deck.get(4),deck.get(5), deck.get(6), deck.get(7), deck.get(8),player2);		
+		
+		//Compare the two results
 		message.setResult(Result.checkWinner(player, player2));
 		
-		System.out.println(message.getResult());
 		int[] cards = {deck.get(0).getId(),deck.get(1).getId(),deck.get(2).getId(),deck.get(3).getId(),deck.get(4).getId(),deck.get(5).getId(),deck.get(6).getId(),deck.get(7).getId(),deck.get(8).getId()};
     	message.setCards(cards);
 		message.setType("Start");
@@ -140,7 +128,6 @@ public class SocketController {
     	turn  = game.turnCounter();
     	message.setType("Check");
     	message.setTurn(turn);
-    	
     	return message;
     	}
     }
@@ -164,8 +151,6 @@ public class SocketController {
     	game.setRaiseTurned(message.getName());
     	turn  = game.turnCounter();
     	message.setTurn(turn);
-    	//turn = game.setRaiseTurn(message.isRaise(), bol2, bol3)
-    	System.out.println("Raise lefutott" + message.getCredit());
     	return message;
     	}
     }
@@ -177,8 +162,6 @@ public class SocketController {
     		message.setType("otherLeft");
         	return message;
     	}else {
-    	//game.setRaiseTurned(message.getName());
-    	//turn = game.setRaiseTurn(message.isRaise(), bol2, bol3)
     	game.setTurnedTrue();
     	turn  = game.turnCounter();
     	message.setTurn(turn);
@@ -195,8 +178,6 @@ public class SocketController {
     	}else {
     	game.setRaiseTurned(message.getName());
     	message.setTurn(turn);
-    	//turn = game.setRaiseTurn(message.isRaise(), bol2, bol3)
-    	System.out.println("overCall lefutott" + message.getCredit());
     	return message;}
     }
     
@@ -210,8 +191,7 @@ public class SocketController {
     		game.setTurnedTrue();
         	turn  = game.turnCounter();
         	message.setTurn(turn);
-    	System.out.println("calledOverRaise lefutott" + message.getCredit());
-    	return message;}
+        	return message;}
     }
     
     @MessageMapping("/fold")
