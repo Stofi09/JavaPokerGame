@@ -177,9 +177,11 @@ public class SocketController {
     		message.setType("otherLeft");
         	return message;
     	}else {
-    	game.setRaiseTurned(message.getName());
+    	//game.setRaiseTurned(message.getName());
     	//turn = game.setRaiseTurn(message.isRaise(), bol2, bol3)
-    	System.out.println("equalCall lefutott" + message.getCredit());
+    	game.setTurnedTrue();
+    	turn  = game.turnCounter();
+    	message.setTurn(turn);
     	return message;
     	}
     }
@@ -192,6 +194,7 @@ public class SocketController {
         	return message;
     	}else {
     	game.setRaiseTurned(message.getName());
+    	message.setTurn(turn);
     	//turn = game.setRaiseTurn(message.isRaise(), bol2, bol3)
     	System.out.println("overCall lefutott" + message.getCredit());
     	return message;}
@@ -204,8 +207,9 @@ public class SocketController {
     		message.setType("otherLeft");
         	return message;
     	}else {
-    	game.setRaiseTurned(message.getName());
-    	//turn = game.setRaiseTurn(message.isRaise(), bol2, bol3)
+    		game.setTurnedTrue();
+        	turn  = game.turnCounter();
+        	message.setTurn(turn);
     	System.out.println("calledOverRaise lefutott" + message.getCredit());
     	return message;}
     }
@@ -219,7 +223,6 @@ public class SocketController {
     	}else {
     	game.nullTurn();
     	turn = game.turnCounter();
-    	
     	message.setType("Fold");
     	message.setTurn(0);
     	return message;}

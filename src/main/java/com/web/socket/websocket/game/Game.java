@@ -23,6 +23,11 @@ public class Game implements iGame{
 	private int turn;
 	public Game() {}
 	
+	public void setTurnedTrue() {
+		this.player1.setHasTurned(true);
+		this.player2.setHasTurned(true);
+		
+	}
 	
 	public void setRaiseTurned(String name) {
 		if (name.equals(this.player1.getName())) {
@@ -53,8 +58,6 @@ public class Game implements iGame{
 			System.err.println(this.player1.getName() +"\\"+ this.player2.getName() );
 			System.err.print("There is a problem with names..."+name);
 		}
-		//implement this later...
-		//players.get(name).setHasTurned(true);
 	}
 
 	// Sets the players at the start of a game.
@@ -109,6 +112,7 @@ public class Game implements iGame{
 		if (hasTurned()) {
 			turn++;
 			setTurnFalse();
+			System.out.println("turn: " + turn);
 		}
 		// for new games, 7 might not be good?
 		if (turn == 7) {
