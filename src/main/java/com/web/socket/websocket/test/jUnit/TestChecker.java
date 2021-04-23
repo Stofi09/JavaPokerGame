@@ -1,10 +1,9 @@
 package com.web.socket.websocket.test.jUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import com.web.socket.websocket.game.Card;

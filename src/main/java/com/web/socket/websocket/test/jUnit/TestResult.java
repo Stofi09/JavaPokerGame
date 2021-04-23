@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import com.web.socket.websocket.game.Card;
 import com.web.socket.websocket.game.Player;
-import com.web.socket.websocket.result.Checker;
 import com.web.socket.websocket.result.Result;
 
 class TestResult {
