@@ -66,7 +66,7 @@ public class Checker {
 	}
 	// Method to decide wich cards rank is higher
 	// Do I need an else if? 
-	public void getHigher() {
+	private void getHigher() {
 		if (this.Card1.getRank()>this.Card2.getRank()) {
 			this.higherCard = this.Card1.getRank();
 			this.lesserCard = this.Card2.getRank();

@@ -39,10 +39,7 @@ public class Card implements Comparable<Card> {
 		return "Card [" + this.img+"]" + this.id +"";
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Card [color=" + color + ", rank=" + rank + ", id=" + id + "]";
-//	}
+
 	public static ArrayList<Card> makeDeck() {
 		ArrayList<Card> deck = new ArrayList<>(); 
 		for (Enum_Card e:Enum_Card.values()) {

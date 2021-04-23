@@ -95,7 +95,6 @@ public class SocketController {
     	// keep the deck array- just shuffle if its not the first game
     	if (deck == null) {
     	 deck = new ArrayList<>();
-    	 System.out.println("sikerult");
     	} 
 		deck = Card.makeDeck();
 		Collections.shuffle(deck);

@@ -16,7 +16,7 @@ public class Game implements iGame{
 	private Player player1;
 	@Autowired
 	private Player player2;
-	private static int numOfPlayerNeeded = 2;
+
 	
 	private static ArrayList<Card>deck1;
 	private int boardCredit;
