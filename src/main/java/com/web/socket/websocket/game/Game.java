@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.web.socket.websocket.controller.SocketController;
+
 
 
 
@@ -155,14 +157,16 @@ public class Game implements iGame{
 	public void nullPlayerId(String playerId) {
 		if (this.player1 != null) {
 			if (playerId.equals(this.player1.getId())){
+				System.out.println("player1 has been removed: " +  this.player1.getId());
 				this.player1 = null;
-				System.out.println("player1 has been removed");
+				SocketController.setHasDisconnectedToTrue();
 			}
 		}
 		if(this.player2 != null) {
 			 if (playerId.equals(this.player2.getId())) {
+				 System.out.println("player2 has been removed" +  this.player2.getId());
 				this.player2 = null;
-				System.out.println("player2 has been removed");
+				SocketController.setHasDisconnectedToTrue();
 			}
 		}
 	}

@@ -64,11 +64,14 @@ public class SocketController {
 			message.setType("reloadPage");
     	}
     	if (game.getPlayer1() != null && game.getPlayer2() != null) {
+    		System.out.println("inside1");
     		if (game.getPlayer1().getName().equals(game.getPlayer2().getName())) {
+    			System.out.println("inside2");
     			message.setName("There are already two players playing. Please wait until they finish.");
     			message.setType("reloadPage");
     		}
     	}
+    	
         return message;
     }
     
