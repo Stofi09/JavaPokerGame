@@ -45,9 +45,10 @@ public class SocketController {
     public MessageBean sendToAll(@Payload MessageBean message , @Header("simpSessionId") String sessionId) {
     	
     	
-    	
+    
     	setHasDisconnectedtoFalse();
     	System.out.println(sessionId);
+    	System.out.println("email: "+ message.getEmail());
     	if(game == null ) {
     		game = new Game();
     	}if (game.getPlayer1() == null) {
@@ -56,6 +57,7 @@ public class SocketController {
     		message.setCredit(1000);
     		message.setType("Join");
     		if (!message.getEmail().equals("")) {
+    			System.out.println("email: "+ message.getEmail());
         		em.sendMessage(message.getEmail(), message.getName());
         	}
     	}else if (game.getPlayer2() == null){
@@ -66,6 +68,7 @@ public class SocketController {
     		message.setOppCredit(1000);
     		message.setType("Join");
     		if (!message.getEmail().equals("")) {
+    			System.out.println("email: "+ message.getEmail());
         		em.sendMessage(message.getEmail(), message.getName());
         	}
     	}else {
