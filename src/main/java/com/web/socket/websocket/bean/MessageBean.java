@@ -3,6 +3,7 @@ package com.web.socket.websocket.bean;
 
 public class MessageBean {
     private String name;
+    private String email;
     private String oppName;
 	private String message;
     private int credit;
@@ -25,6 +26,14 @@ public class MessageBean {
     
 
 
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getId() {
 		return id;

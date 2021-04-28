@@ -7,6 +7,7 @@ import com.web.socket.websocket.game.Card;
 import com.web.socket.websocket.game.Game;
 import com.web.socket.websocket.game.Player;
 import com.web.socket.websocket.result.Result;
+import com.web.socket.websocket.service.EmailService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,11 +37,14 @@ public class SocketController {
 	private Player player2;
 	
 	ArrayList<Card> deck;
-	
+	@Autowired
+	EmailService em;
 	
     @MessageMapping("/Join")
     @SendTo("/topic/user")
     public MessageBean sendToAll(@Payload MessageBean message , @Header("simpSessionId") String sessionId) {
+    	
+    	
     	
     	setHasDisconnectedtoFalse();
     	System.out.println(sessionId);
@@ -51,6 +55,9 @@ public class SocketController {
     		message.setId(sessionId);
     		message.setCredit(1000);
     		message.setType("Join");
+    		if (!message.getEmail().equals("")) {
+        		em.sendMessage(message.getEmail(), message.getName());
+        	}
     	}else if (game.getPlayer2() == null){
     		game.setPlayer(message.getName(),1000,sessionId);
     		message.setOppName(game.getPlayer1().getName());
@@ -58,6 +65,9 @@ public class SocketController {
     		message.setCredit(1000);
     		message.setOppCredit(1000);
     		message.setType("Join");
+    		if (!message.getEmail().equals("")) {
+        		em.sendMessage(message.getEmail(), message.getName());
+        	}
     	}else {
     		System.err.println("there are 2 players already");
     		message.setName("There are already two players playing. Please wait until they finish.");
