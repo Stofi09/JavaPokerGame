@@ -227,8 +227,16 @@ public class Game implements iGame{
 		return getPlayer1() +""+ getPlayer2();
 	}
 
-	public void nullTurn() {
-		this.turn = 0;
+	public void restartTurn() {
+		this.turn = 1;
+	}
+
+	public int getTurn() {
+		return turn;
+	}
+
+	public void setTurn(int turn) {
+		this.turn = turn;
 	}
 
 }

@@ -102,7 +102,7 @@ public class SocketController {
         	return message;
     	}else {
     	// Null the game turn at the end of the game	
-    	game.nullTurn();
+    	game.restartTurn();
     	turn = game.turnCounter();
     	// keep the deck array- just shuffle if its not the first game
     	if (deck == null) {
@@ -124,6 +124,7 @@ public class SocketController {
 		int[] cards = {deck.get(0).getId(),deck.get(1).getId(),deck.get(2).getId(),deck.get(3).getId(),deck.get(4).getId(),deck.get(5).getId(),deck.get(6).getId(),deck.get(7).getId(),deck.get(8).getId()};
     	message.setCards(cards);
 		message.setType("Start");
+	//	message.setTurn(turn);
     	return message;
     	}
     }
@@ -223,7 +224,7 @@ public class SocketController {
     		message.setType("otherLeft");
         	return message;
     	}else {
-    	game.nullTurn();
+    	game.restartTurn();
     	turn = game.turnCounter();
     	message.setType("Fold");
     	message.setTurn(0);
