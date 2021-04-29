@@ -43,12 +43,8 @@ public class SocketController {
     @MessageMapping("/Join")
     @SendTo("/topic/user")
     public MessageBean sendToAll(@Payload MessageBean message , @Header("simpSessionId") String sessionId) {
-    	
-    	
-    
     	setHasDisconnectedtoFalse();
     	System.out.println(sessionId);
-    	System.out.println("email: "+ message.getEmail());
     	if(game == null ) {
     		game = new Game();
     	}if (game.getPlayer1() == null) {
@@ -56,10 +52,10 @@ public class SocketController {
     		message.setId(sessionId);
     		message.setCredit(1000);
     		message.setType("Join");
-    		if (!message.getEmail().equals("")) {
-    			System.out.println("email: "+ message.getEmail());
-        		em.sendMessage(message.getEmail(), message.getName());
-        	}
+//    		if (!message.getEmail().equals("")) {
+//    			System.out.println("email: "+ message.getEmail());
+//        		em.sendMessage(message.getEmail(), message.getName());
+//        	}
     	}else if (game.getPlayer2() == null){
     		game.setPlayer(message.getName(),1000,sessionId);
     		message.setOppName(game.getPlayer1().getName());
@@ -67,10 +63,10 @@ public class SocketController {
     		message.setCredit(1000);
     		message.setOppCredit(1000);
     		message.setType("Join");
-    		if (!message.getEmail().equals("")) {
-    			System.out.println("email: "+ message.getEmail());
-        		em.sendMessage(message.getEmail(), message.getName());
-        	}
+//    		if (!message.getEmail().equals("")) {
+//    			System.out.println("email: "+ message.getEmail());
+//        		em.sendMessage(message.getEmail(), message.getName());
+//        	}
     	}else {
     		System.err.println("there are 2 players already");
     		message.setName("There are already two players playing. Please wait until they finish.");
@@ -155,6 +151,17 @@ public class SocketController {
     	message.setType("allIn");
     	return message;
     }
+    
+    @MessageMapping("/subscribe")
+    @SendTo("/topic/user")
+    public MessageBean subscribe(@Payload MessageBean message) {
+    	if(!message.getEmail().equals("")) {
+    		em.sendMessage(message.getEmail(), message.getName());
+    	}
+    	message.setType("afterSubscribe");
+    	return message;
+    }
+    
     
     @MessageMapping("/firstRaise")
     @SendTo("/topic/user")
