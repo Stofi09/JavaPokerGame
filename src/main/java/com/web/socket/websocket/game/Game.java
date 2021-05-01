@@ -40,14 +40,12 @@ public class Game implements iGame{
 		}
 	}
 	public int setRaiseTurn(boolean bol1,boolean bol2, boolean bol3) {
-		System.out.println(bol1+""+bol2+""+bol3);
 		if (bol2 && !bol1 && !bol3) {
 			turn++;
 		}
 		else if (bol1 && bol3)	{
 			turn++;
 		}
-		System.out.println(turn);
 		return turn;
 	}
 	
@@ -67,19 +65,16 @@ public class Game implements iGame{
 	public void setPlayer(String name, int credit,String id) {
 		if (player1 == null) {
 			this.player1 = new Player( name,  credit, id);
-			System.out.println("player1 has been set."+ "" + player1.toString());
 		}
 		else if (player2 == null){
 			this.player2 = new Player( name,  credit, id);
-			System.out.println("player2 has been set." + "" + player2.toString());
 		}else {
-			System.out.println("Something went wrong calling setPlayer from class Game.");
+			System.err.println("Something went wrong calling setPlayer from class Game.");
 		}
 		
 	}
 	public String getOpponentName(String name) {
 		String result = "undefined";
-		System.out.println("inside getoppn.: " + "" + name );
 		if (name.equals(this.player1.getName())){
 			result = this.player2.getName();
 		} 
@@ -103,24 +98,14 @@ public class Game implements iGame{
 			return  false;
 		}
 	}
-	public int turnRaiseCounter() {
-		
-		
-		return turn;
-	}
 
 	public int turnCounter() {
-	
 		if (hasTurned()) {
 			turn++;
 			setTurnFalse();
 			System.out.println("turn: " + turn);
 		}
-		// for new games, 7 might not be good?
-		if (turn == 7) {
-			turn = 0;
-		}
-		
+		if (turn == 7) turn = 0;
 		return turn;
 	}
 	private void setTurnFalse() {
@@ -157,14 +142,12 @@ public class Game implements iGame{
 	public void nullPlayerId(String playerId) {
 		if (this.player1 != null) {
 			if (playerId.equals(this.player1.getId())){
-				System.out.println("player1 has been removed: " +  this.player1.getId());
 				this.player1 = null;
 				SocketController.setHasDisconnectedToTrue();
 			}
 		}
 		if(this.player2 != null) {
 			 if (playerId.equals(this.player2.getId())) {
-				 System.out.println("player2 has been removed" +  this.player2.getId());
 				this.player2 = null;
 				SocketController.setHasDisconnectedToTrue();
 			}

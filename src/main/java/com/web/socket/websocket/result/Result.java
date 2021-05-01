@@ -31,7 +31,6 @@ private  Checker check;
 	public void setResult (Card card1, Card card2, Card card3, Card card4, Card card5, Card card6,Card card7,Player player) {
 		this.check = new Checker(card1,card2,card3,card4,card5,card6,card7);
 		hand++;
-		System.out.println("hand = "+hand +" "+card1+""+card2+""+card3+""+card4+""+card5+""+card6+""+card7);
 		checkBooleans();
 		setPlayerResult(player);
 	}
@@ -64,7 +63,6 @@ public void doReSolve() {
 	if(this.fourOfAKind) reSolver(8);
 	if(this.flushSeq) reSolver(9);
 	if (this.royalFlush) reSolver(10);
-	System.out.println("The two results are: "+this.res1 + " " + this.res2);
 }
 
 //Set booleans to false.
@@ -102,10 +100,6 @@ public  void setPlayerResult(Player player) {
 //Player2 == 2
 public static String checkWinner(Player player1, Player player2) {
 	String result = "draw";
-	System.out.println("inside cw");
-	System.out.println(player1.toString() + "|||" + player2.toString());
-	System.out.println(player1.getHigherCard() + "//// " + player1.getLesserCard());
-	System.out.println(player2.getHigherCard() + "//// " + player2.getLesserCard());
 	if (player1.getResult1() > player2.getResult1()) result = player1.getName();
 	else if (player1.getResult1() < player2.getResult1()) result = player2.getName();
 	else {
@@ -120,7 +114,6 @@ public static String checkWinner(Player player1, Player player2) {
 			else if (player1.getLesserCard() < player2.getLesserCard()) result = player2.getName();
 		}
 	}
-	System.out.println("inside cw: " + result);
 	return result;
 }
 

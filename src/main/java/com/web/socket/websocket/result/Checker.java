@@ -55,14 +55,10 @@ public class Checker {
 	
 	//Do I need this?
 	public void doCheck() {
-		getHigher();
-		System.out.println("higher:"+ this.higherCard+"and "+this.lesserCard);
-		pair();
-		System.out.println("pairRank:"+ this.pairRankRes1+"and "+this.pairRankRes2);
-		pairColor();
-		System.out.println("pairCOlor:"+ this.pairColorRes1+"and "+this.pairColorRes2);
+		getHigher();		
+		pair();		
+		pairColor();		
 		checkSeq();
-		System.out.println("res:"+ this.sequence);
 	}
 	// Method to decide wich cards rank is higher
 	// Do I need an else if? 
@@ -83,14 +79,11 @@ public class Checker {
 	// Check for pairs in rank
 	public void pair() {
 		if ((this.Card1.getRank()== this.Card2.getRank())){
-			System.out.println("lapok azonosak");
 			this.pairRankRes1 = Pair.pairChecker(this.Card1.getRank(), this.Card3.getRank(),this.Card4.getRank(), this.Card5.getRank(), this.Card6.getRank(), this.Card7.getRank());
 			this.pairRankRes1++; // same card pair
 		}
 		else {
-			System.out.println("nem azonosaka");
-			this.pairRankRes1 = Pair.pairChecker(this.Card1.getRank(), this.Card3.getRank(),this.Card4.getRank(), this.Card5.getRank(), this.Card6.getRank(), this.Card7.getRank());
-			
+			this.pairRankRes1 = Pair.pairChecker(this.Card1.getRank(), this.Card3.getRank(),this.Card4.getRank(), this.Card5.getRank(), this.Card6.getRank(), this.Card7.getRank());			
 			this.pairRankRes2 = Pair.pairChecker(this.Card2.getRank(), this.Card3.getRank(),this.Card4.getRank(), this.Card5.getRank(), this.Card6.getRank(), this.Card7.getRank());
 		}
 		
@@ -99,12 +92,10 @@ public class Checker {
 	//check if it contains  same
 	public void pairColor() {
 		if (Pair.handEqual(this.Card1.getColor(), this.Card2.getColor())){
-			System.out.println("lapok azonosak,Color");
 			this.pairColorRes1 = Pair.pairChecker(this.Card1.getColor(), this.Card3.getColor(),this.Card4.getColor(), this.Card5.getColor(), this.Card6.getColor(), this.Card7.getColor());
 			this.pairColorRes1++;
 		}
 		else {
-			System.out.println("nem azonosoka,Color");
 			this.pairColorRes1 = Pair.pairChecker(this.Card1.getColor(), this.Card3.getColor(),this.Card4.getColor(), this.Card5.getColor(), this.Card6.getColor(), this.Card7.getColor());
 			this.pairColorRes2 = Pair.pairChecker(this.Card2.getColor(), this.Card3.getColor(),this.Card4.getColor(), this.Card5.getColor(), this.Card6.getColor(), this.Card7.getColor());
 		} 

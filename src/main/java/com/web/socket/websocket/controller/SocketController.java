@@ -44,18 +44,15 @@ public class SocketController {
     @SendTo("/topic/user")
     public MessageBean sendToAll(@Payload MessageBean message , @Header("simpSessionId") String sessionId) {
     	setHasDisconnectedtoFalse();
-    	System.out.println(sessionId);
-    	if(game == null ) {
-    		game = new Game();
-    	}if (game.getPlayer1() == null) {
+
+    	if(game == null ) game = new Game();
+    		
+    	if (game.getPlayer1() == null) {
     		game.setPlayer(message.getName(),1000,sessionId);
     		message.setId(sessionId);
     		message.setCredit(1000);
     		message.setType("Join");
-//    		if (!message.getEmail().equals("")) {
-//    			System.out.println("email: "+ message.getEmail());
-//        		em.sendMessage(message.getEmail(), message.getName());
-//        	}
+    		
     	}else if (game.getPlayer2() == null){
     		game.setPlayer(message.getName(),1000,sessionId);
     		message.setOppName(game.getPlayer1().getName());
@@ -63,19 +60,15 @@ public class SocketController {
     		message.setCredit(1000);
     		message.setOppCredit(1000);
     		message.setType("Join");
-//    		if (!message.getEmail().equals("")) {
-//    			System.out.println("email: "+ message.getEmail());
-//        		em.sendMessage(message.getEmail(), message.getName());
-//        	}
+
     	}else {
     		System.err.println("there are 2 players already");
     		message.setName("There are already two players playing. Please wait until they finish.");
 			message.setType("reloadPage");
     	}
     	if (game.getPlayer1() != null && game.getPlayer2() != null) {
-    		System.out.println("inside1");
+    	
     		if (game.getPlayer1().getName().equals(game.getPlayer2().getName())) {
-    			System.out.println("inside2");
     			message.setName("There are already two players playing. Please wait until they finish.");
     			message.setType("reloadPage");
     		}
@@ -124,7 +117,6 @@ public class SocketController {
 		int[] cards = {deck.get(0).getId(),deck.get(1).getId(),deck.get(2).getId(),deck.get(3).getId(),deck.get(4).getId(),deck.get(5).getId(),deck.get(6).getId(),deck.get(7).getId(),deck.get(8).getId()};
     	message.setCards(cards);
 		message.setType("Start");
-	//	message.setTurn(turn);
     	return message;
     	}
     }
