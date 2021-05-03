@@ -22,6 +22,7 @@ public class EmailService {
 	
 	private String MESSAGE_TO;
 	
+	
 	@Autowired
 	public void setJavaMailSender(JavaMailSender jms) {
 		this.javaMailSender = jms;
