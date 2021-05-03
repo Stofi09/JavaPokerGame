@@ -22,7 +22,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	private Environment env;
 	
 	public void getEnv() {
-		System.out.println(env.getProperty("password"));
+		System.out.println(env.getProperty("mail_pass"));
 	}
 	
     @Override
